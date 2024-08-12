@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ include "terminal-client.fullname" . }}
+  labels:
+    {{- include "terminal-client.labels" . | nindent 4 }}
+data:
+  LOG_LEVEL: "{{ .Values.env.LOG_LEVEL }}"
+  NODE_ID: "{{ .Values.env.NODE_ID }}"
+  REMOTE_HOST: "{{ .Values.env.REMOTE_HOST }}"
+  COMMAND_PREFIX: "{{ .Values.env.COMMAND_PREFIX }}"
+  ESCALATION_CHAR: "{{ .Values.env.ESCALATION_CHAR }}"
+  ESCALATION_BY_DEFAULT:  "{{ .Values.env.ESCALATION_BY_DEFAULT }}"
