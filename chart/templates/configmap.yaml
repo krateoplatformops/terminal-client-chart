@@ -5,6 +5,7 @@ metadata:
   labels:
     {{- include "terminal-client.labels" . | nindent 4 }}
 data:
+  PORT: "{{ .Values.service.port }}"
   LOG_LEVEL: "{{ .Values.env.LOG_LEVEL }}"
   NODE_ID: "{{ .Values.env.NODE_ID }}"
   REMOTE_HOST: "{{ .Values.env.REMOTE_HOST }}"

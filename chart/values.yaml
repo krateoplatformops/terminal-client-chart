@@ -72,23 +72,31 @@ resources: {}
   #   cpu: 100m
   #   memory: 128Mi
 
+# livenessProbe:
+#   httpGet:
+#     path: /healthz
+#     port: http
+
 livenessProbe:
   httpGet:
     path: /healthz
     port: http
 
+readinessProbe:
+  httpGet:
+    path: /readyz
+    port: http
+
 # Additional volumes on the output Deployment definition.
-volumes: []
-# - name: foo
-#   secret:
-#     secretName: mysecret
-#     optional: false
+volumes:
+  - name: noderoot
+    hostPath:
+      path: /
 
 # Additional volumeMounts on the output Deployment definition.
-volumeMounts: []
-# - name: foo
-#   mountPath: "/etc/foo"
-#   readOnly: true
+volumeMounts:
+  - mountPath: /host
+    name: noderoot
 
 nodeSelector: {}
 
@@ -98,8 +106,8 @@ affinity: {}
 
 env:
   LOG_LEVEL: debug
-  NODE_ID: NODE_ID
-  REMOTE_HOST: REMOTE_HOST
+  NODE_ID: a1aa50e5-d3bc-40ad-9532-7757a87c349b
+  REMOTE_HOST: http://4.209.229.229:8084
   COMMAND_PREFIX: 'chroot /host bash -c'
   ESCALATION_CHAR: '!'
   ESCALATION_BY_DEFAULT: "true"
